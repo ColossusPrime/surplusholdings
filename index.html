@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surplus Holdings — We buy excess inventory</title>
+<meta name="description" content="Surplus Holdings buys overstock, customer returns, closeouts and surplus equipment by the pallet or truckload. Firm offers in 48 hours, freight handled.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Families are loaded separately so one failed request can't block the others -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F3F4F1;      /* manifest paper */
+  --steel:#DDE1E6;      /* panel grey */
+  --ink:#18233A;        /* navy ink */
+  --ink-soft:#4A556B;
+  --kraft:#BE8F5E;      /* corrugated box */
+  --kraft-dark:#8C6239;
+  --kraft-light:#D9B68C;
+  --wrap:#2F5BEA;       /* shrink-wrap blue, the action colour */
+  --wrap-dark:#1F43B8;
+  --white:#FFFFFF;
+  --line:rgba(24,35,58,.14);
+
+  --f-display:'Big Shoulders Display','Big Shoulders',Impact,'Arial Narrow',sans-serif;
+  --f-stencil:'Big Shoulders Stencil Display','Big Shoulders Stencil','Big Shoulders Display',Impact,sans-serif;
+  --f-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  --wrap-w:1200px;
+  --gutter:clamp(16px,4vw,40px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:800;line-height:.95;letter-spacing:-.005em;margin:0}
+p{margin:0}
+.wrap{max-width:var(--wrap-w);margin:0 auto;padding:0 var(--gutter)}
+:focus-visible{outline:3px solid var(--wrap);outline-offset:3px;border-radius:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font:600 16px/1 var(--f-body);padding:16px 22px;border-radius:6px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.btn-primary{background:var(--wrap);color:var(--white)}
+.btn-primary:hover{background:var(--wrap-dark)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:20;background:rgba(243,244,241,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:34px;height:34px;background:var(--kraft);border-radius:3px;position:relative;box-shadow:inset 0 -4px 0 var(--kraft-dark)}
+.logo-mark::after{content:"";position:absolute;left:0;right:0;top:9px;height:5px;background:var(--kraft-light)}
+.logo-text{font-family:var(--f-stencil);font-weight:800;font-size:26px;letter-spacing:.04em;line-height:1}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;margin:0;padding:0}
+.nav-links a{text-decoration:none;font-weight:500;font-size:15px}
+.nav-links a:not(.btn):hover{color:var(--wrap)}
+.nav-links .btn{padding:12px 18px;font-size:15px}
+.menu-btn{display:none;background:none;border:0;padding:10px;cursor:pointer;color:var(--ink)}
+.menu-btn span{display:block;width:24px;height:2px;background:currentColor;margin:5px 0;transition:transform .2s,opacity .2s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Hero */
+.hero{padding:clamp(48px,8vw,96px) 0 0;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,72px);align-items:end}
+.hero-copy{padding-bottom:clamp(40px,6vw,80px)}
+.hero h1{font-size:clamp(56px,8.4vw,112px);font-weight:900;max-width:9ch}
+.hero-lede{margin-top:28px;font-size:clamp(18px,1.6vw,20px);color:var(--ink-soft);max-width:34em}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-note{margin-top:26px;font-size:14px;color:var(--ink-soft);max-width:36em}
+
+/* The pallet */
+.pallet{position:relative;padding-top:20px}
+.stack{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;position:relative}
+.box{position:relative;background:var(--kraft);border-radius:3px;min-height:92px;box-shadow:inset 0 -7px 0 rgba(0,0,0,.09),inset -5px 0 0 rgba(0,0,0,.05);animation:drop .7s cubic-bezier(.3,.9,.35,1.05) both;animation-delay:var(--d,0s)}
+.box::before{content:"";position:absolute;left:0;right:0;top:12px;height:11px;background:var(--kraft-light);opacity:.75}
+.box.tall{min-height:132px}
+.box.dark{background:var(--kraft-dark)}
+.box.dark::before{background:var(--kraft)}
+.box .tag{position:absolute;left:10px;bottom:12px;right:10px;background:var(--white);padding:6px 9px 7px;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.box .tag b{display:block;font-family:var(--f-stencil);font-weight:800;font-size:clamp(13px,1.35vw,19px);letter-spacing:.03em;line-height:1;text-transform:uppercase}
+.box .tag small{display:block;font-size:11px;color:var(--ink-soft);margin-top:3px}
+.box.handle::after{content:"";position:absolute;right:12px;top:2px;width:26px;height:8px;border-radius:8px;background:rgba(0,0,0,.25)}
+.c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.s2{grid-column-start:2}
+.deck{height:22px;margin-top:6px;background:repeating-linear-gradient(90deg,#A77C4C 0 18%,#8E6638 18% 20%);border-radius:2px;animation:fadein .4s ease both}
+.feet{display:flex;justify-content:space-between;padding:0 4%;animation:fadein .4s ease both}
+.feet span{width:13%;height:20px;background:#7D5A31}
+.floor{height:10px;background:var(--ink);margin:0 calc(-1 * var(--gutter))}
+@keyframes drop{from{transform:translateY(-160px);opacity:0}55%{opacity:1}80%{transform:translateY(5px)}to{transform:none;opacity:1}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+
+/* Sections */
+section{padding:clamp(72px,10vw,128px) 0}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:end;margin-bottom:clamp(36px,5vw,60px)}
+.sec-head h2{font-size:clamp(44px,6vw,76px)}
+.sec-head p{color:var(--ink-soft);max-width:32em}
+
+/* What we buy */
+.buy-list{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink)}
+.buy-item{padding:28px 28px 32px 0;border-bottom:1px solid var(--line)}
+.buy-item:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid var(--line)}
+.buy-item h3{font-size:30px;font-weight:800}
+.buy-item p{margin-top:10px;color:var(--ink-soft);font-size:16px;max-width:28em}
+.buy-foot{margin-top:28px;font-weight:600}
+
+/* Process */
+.process{background:var(--ink);color:var(--paper)}
+.process .sec-head p{color:#B9C1D1}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:step}
+.steps li{position:relative;padding:0 28px 0 0;counter-increment:step}
+.steps li::before{content:counter(step);display:block;font-family:var(--f-stencil);font-weight:800;font-size:88px;line-height:.8;color:var(--kraft);margin-bottom:22px}
+.steps li::after{content:"";position:absolute;top:34px;left:72px;right:22px;height:2px;background:repeating-linear-gradient(90deg,rgba(243,244,241,.35) 0 8px,transparent 8px 14px)}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:30px}
+.steps p{margin-top:10px;color:#B9C1D1;font-size:16px}
+
+/* Split audiences */
+.split{padding:0}
+.split-grid{display:grid;grid-template-columns:1fr 1fr}
+.side{padding:clamp(56px,8vw,104px) clamp(24px,5vw,72px)}
+.side-sell{background:var(--steel)}
+.side-buy{background:var(--kraft);color:var(--ink)}
+.side h2{font-size:clamp(40px,4.8vw,62px);max-width:10ch}
+.side ul{list-style:none;padding:0;margin:32px 0 36px}
+.side li{padding:16px 0;border-top:1px solid rgba(24,35,58,.2)}
+.side li:last-child{border-bottom:1px solid rgba(24,35,58,.2)}
+.side li strong{display:block;font-size:17px}
+.side li span{display:block;color:var(--ink-soft);font-size:15.5px;margin-top:2px}
+.side-buy li span{color:#3A2A18}
+.side-buy .btn-ghost:hover{background:var(--ink);color:var(--kraft-light)}
+
+/* Lots */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{font:500 15px/1 var(--f-body);padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lots{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lots th{text-align:left;font-size:13px;font-weight:600;color:var(--ink-soft);padding:14px 16px;background:#ECEEEA;border-bottom:1px solid var(--line)}
+.lots td{padding:18px 16px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:15.5px}
+.lots tr:last-child td{border-bottom:0}
+.lots tbody tr:hover{background:#F8F9F7}
+.lot-id{font-family:var(--f-stencil);font-weight:800;font-size:20px;letter-spacing:.03em;white-space:nowrap}
+.lot-what strong{display:block;font-weight:600}
+.lot-what span{color:var(--ink-soft);font-size:14px}
+.cond{display:inline-block;font-size:13px;font-weight:600;padding:4px 9px;border-radius:4px;background:var(--steel);white-space:nowrap}
+.cond.new{background:#DCE6FF;color:var(--wrap-dark)}
+.cond.used{background:#F1E3D2;color:#6B4520}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.price{font-weight:700}
+.retail{color:var(--ink-soft);text-decoration:line-through;text-decoration-thickness:1px}
+.link-btn{font:600 14.5px/1 var(--f-body);color:var(--wrap);background:none;border:0;padding:8px 0;cursor:pointer;white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
+.link-btn:hover{color:var(--wrap-dark)}
+.lots-note{margin-top:16px;font-size:14px;color:var(--ink-soft)}
+.empty{padding:36px;text-align:center;color:var(--ink-soft)}
+
+/* Form */
+.offer{background:var(--white);border-top:1px solid var(--line)}
+.offer-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,6vw,88px);align-items:start}
+.offer h2{font-size:clamp(44px,6vw,76px)}
+.offer-intro p{margin-top:20px;color:var(--ink-soft);max-width:30em}
+.contact-lines{margin-top:36px;display:grid;gap:14px}
+.contact-lines a{text-decoration:none;font-weight:600;font-size:18px}
+.contact-lines a:hover{color:var(--wrap)}
+.contact-lines div span{display:block;font-size:13px;color:var(--ink-soft)}
+.toggle{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--steel);border-radius:8px;padding:4px;margin-bottom:26px}
+.toggle input{position:absolute;opacity:0;pointer-events:none}
+.toggle label{padding:11px 20px;border-radius:6px;font-weight:600;font-size:15px;cursor:pointer;text-align:center}
+.toggle input:checked + label{background:var(--white);box-shadow:0 1px 2px rgba(24,35,58,.18)}
+.toggle input:focus-visible + label{outline:3px solid var(--wrap);outline-offset:2px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:14px;font-weight:600}
+.field label .opt{font-weight:400;color:var(--ink-soft)}
+.field input,.field select,.field textarea{font:400 16px/1.4 var(--f-body);color:var(--ink);background:var(--paper);border:1.5px solid #C8CDD4;border-radius:6px;padding:13px 14px;width:100%}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--wrap);box-shadow:0 0 0 3px rgba(47,91,234,.18);background:var(--white)}
+.field input[type=file]{padding:10px;background:var(--white)}
+.field .hint{font-size:13px;color:var(--ink-soft)}
+.field.invalid input,.field.invalid select{border-color:#C2341B}
+.err{font-size:13px;color:#C2341B;display:none}
+.field.invalid .err{display:block}
+.form-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:24px}
+.form-actions small{color:var(--ink-soft);font-size:13.5px;max-width:28em}
+[data-mode-only]{display:none}
+form[data-mode="sell"] [data-mode-only="sell"],form[data-mode="buy"] [data-mode-only="buy"]{display:flex}
+.form-status{margin-top:22px;padding:18px 20px;border-radius:8px;background:#E3F1E6;color:#1F5A2E;font-weight:500;display:none}
+.form-status.show{display:block}
+
+/* FAQ */
+.faq-list{border-top:2px solid var(--ink);max-width:900px}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-family:var(--f-display);font-weight:800;font-size:clamp(24px,2.6vw,30px);line-height:1.05}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"";flex:none;width:14px;height:14px;border-right:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg) translate(-3px,-3px);transition:transform .2s}
+.faq-list details[open] summary::after{transform:rotate(225deg) translate(-3px,-3px)}
+.faq-list details p{padding:0 0 26px;color:var(--ink-soft);max-width:44em}
+
+/* Footer */
+.site-footer{background:var(--ink);color:#B9C1D1;padding:64px 0 40px;font-size:15px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.site-footer .logo-text{color:var(--paper)}
+.site-footer h3{font-family:var(--f-body);font-size:14px;font-weight:600;color:var(--paper);margin-bottom:14px;line-height:1.3}
+.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.site-footer a{text-decoration:none}
+.site-footer a:hover{color:var(--paper)}
+.foot-blurb{margin-top:16px;max-width:26em}
+.foot-base{margin-top:48px;padding-top:24px;border-top:1px solid rgba(185,193,209,.2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13.5px}
+
+/* Responsive */
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding-bottom:0}
+  .pallet{max-width:560px}
+  .buy-list{grid-template-columns:1fr 1fr}
+  .buy-item,.buy-item:not(:nth-child(3n+1)){padding:24px 24px 28px 0;border-left:0}
+  .buy-item:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr;row-gap:48px}
+  .steps li::after{display:none}
+  .offer-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .menu-btn{display:block}
+  .nav-links{position:absolute;top:72px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gutter) 20px;display:none}
+  .nav-links.open{display:flex}
+  .nav-links li a:not(.btn){display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+  .nav-links .btn{margin-top:16px;width:100%;padding:16px}
+  .sec-head{grid-template-columns:1fr;gap:16px}
+  .split-grid{grid-template-columns:1fr}
+  /* Lots table becomes stacked manifest cards */
+  .lots,.lots tbody,.lots tr,.lots td{display:block;width:100%}
+  .lots thead{display:none}
+  .lots{background:none;border:0}
+  .lots tr{background:var(--white);border:1px solid var(--line);border-radius:8px;margin-bottom:12px;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+  .lots td{padding:0;border:0;text-align:left}
+  .lots td[data-label]::before{content:attr(data-label);display:block;font-size:12px;color:var(--ink-soft);margin-bottom:2px}
+  .lots .lot-id,.lots .lot-what{grid-column:1/-1}
+  .lots td.num{text-align:left}
+  .lots tbody tr:hover{background:var(--white)}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .buy-list{grid-template-columns:1fr}
+  .buy-item:nth-child(even){padding-left:0;border-left:0}
+  .steps{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .box{min-height:74px}.box.tall{min-height:104px}
+  .box .tag{left:7px;right:7px;bottom:9px;padding:5px 7px}
+  .box .tag small{display:none}
+  .hero-actions .btn{flex:1 1 100%}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .box,.deck,.feet{animation:none}
+  *{transition:none!important}
+}
+</style>
+<script>var $wc_load=function(a){return JSON.parse(JSON.stringify(a))},$wc_leads=$wc_leads||{doc:{url:$wc_load(document.URL),ref:$wc_load(document.referrer),search:$wc_load(location.search),hash:$wc_load(location.hash)}};</script>
+<script src="//s.ksrndkehqnwntyxlhgto.com/178057.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#top" class="logo" aria-label="Surplus Holdings home">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span class="logo-text">Surplus Holdings</span>
+    </a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#what-we-buy">What we buy</a></li>
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#lots">Current lots</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#offer" class="btn btn-primary" data-mode-link="sell">Get an offer</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 id="hero-title">We buy what's sitting in your warehouse.</h1>
+        <p class="hero-lede">Overstock, customer returns, closeouts and surplus equipment, by the pallet or by the truckload. You get a firm cash offer in 48 hours, we handle the freight, and your dock is clear by the end of the week.</p>
+        <div class="hero-actions">
+          <a href="#offer" class="btn btn-primary" data-mode-link="sell">Get an offer on your inventory</a>
+          <a href="#lots" class="btn btn-ghost">Browse lots for sale</a>
+        </div>
+        <p class="hero-note">Buying from retailers, brands, 3PLs and manufacturers across the continental US. One pallet minimum, no maximum.</p>
+      </div>
+
+      <div class="pallet" aria-hidden="true">
+        <div class="stack">
+          <div class="box c3 handle" style="--d:1.05s"><div class="tag"><b>Closeouts</b><small>Lot 4471</small></div></div>
+          <div class="box c2 dark" style="--d:1.15s"><div class="tag"><b>Shelf pulls</b><small>Lot 4468</small></div></div>
+          <div class="box c3 dark" style="--d:.75s"><div class="tag"><b>Customer returns</b><small>Lot 4465 · 2 pallets</small></div></div>
+          <div class="box c3 handle" style="--d:.85s"><div class="tag"><b>Overstock</b><small>Lot 4462</small></div></div>
+          <div class="box c2" style="--d:.42s"><div class="tag"><b>Electronics</b><small>Lot 4459</small></div></div>
+          <div class="box c2 dark handle" style="--d:.5s"><div class="tag"><b>Apparel</b><small>Lot 4457</small></div></div>
+          <div class="box c2" style="--d:.58s"><div class="tag"><b>Home goods</b><small>Lot 4452</small></div></div>
+          <div class="box c4 tall" style="--d:.1s"><div class="tag"><b>Surplus equipment</b><small>Lot 4449 · freight on us</small></div></div>
+          <div class="box c2 tall dark" style="--d:.2s"><div class="tag"><b>Fixtures</b><small>Lot 4446</small></div></div>
+        </div>
+        <div class="deck"></div>
+        <div class="feet"><span></span><span></span><span></span></div>
+        <div class="floor"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we buy -->
+  <section id="what-we-buy" aria-labelledby="buy-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="buy-title">What we buy</h2>
+        <p>If it's new, returned, discontinued or just taking up space, we'll make an offer on the whole lot. We don't cherry-pick the best SKUs and leave you with the rest.</p>
+      </div>
+      <div class="buy-list">
+        <div class="buy-item"><h3>Overstock and closeouts</h3><p>Discontinued SKUs, seasonal leftovers, packaging changes and over-orders still in the case.</p></div>
+        <div class="buy-item"><h3>Customer returns</h3><p>Tested or untested, single-retailer or mixed. We price for the real condition, whatever the return rate.</p></div>
+        <div class="buy-item"><h3>Shelf pulls</h3><p>Goods pulled from stores with minor shelf wear, price stickers or dented boxes.</p></div>
+        <div class="buy-item"><h3>Damaged and salvage</h3><p>Freight damage, insurance claims, and water or smoke salvage. Unsellable units are recycled with paperwork.</p></div>
+        <div class="buy-item"><h3>Surplus equipment</h3><p>Restaurant lines, office furniture, forklifts, warehouse racking and light industrial machinery.</p></div>
+        <div class="buy-item"><h3>Store fixtures</h3><p>Shelving, gondolas, displays and point-of-sale hardware from remodels and closures.</p></div>
+      </div>
+      <p class="buy-foot">Not sure it qualifies? Send us a photo. Most answers come back the same day.</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="process" id="how-it-works" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="how-title">From dock to paid in a week</h2>
+        <p>No auctions, no consignment, no waiting to see what sells. We buy outright and take on the resale risk ourselves.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Send what you have</h3><p>A manifest, a spreadsheet, or a few photos of the pallets. Whatever you've got is enough to start.</p></li>
+        <li><h3>Get a firm offer</h3><p>Within 48 hours, in writing, and good for 14 days. The number doesn't change at pickup.</p></li>
+        <li><h3>We pick it up</h3><p>Our trucks or our carriers, scheduled around your dock hours. Loading and freight are on us.</p></li>
+        <li><h3>Get paid</h3><p>ACH or wire transfer on the day the goods leave your building.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Sellers / Buyers -->
+  <section class="split" aria-label="For sellers and buyers">
+    <div class="split-grid">
+      <div class="side side-sell">
+        <h2>For companies clearing inventory</h2>
+        <ul>
+          <li><strong>Free up space in days</strong><span>Turn dead stock into cash before the next season's freight arrives.</span></li>
+          <li><strong>One buyer for the whole lot</strong><span>Mixed categories, odd quantities and untested returns all go together.</span></li>
+          <li><strong>Protect your brand</strong><span>We can remove labels, restrict resale channels, or keep goods off specific marketplaces.</span></li>
+          <li><strong>Paperwork handled</strong><span>Bills of sale, recycling records and certificates of destruction for anything unsellable.</span></li>
+        </ul>
+        <a href="#offer" class="btn btn-primary" data-mode-link="sell">Get an offer</a>
+      </div>
+      <div class="side side-buy">
+        <h2>For resellers buying stock</h2>
+        <ul>
+          <li><strong>Manifested lots</strong><span>Item-level lists with quantities, condition and original retail value.</span></li>
+          <li><strong>Buy at your scale</strong><span>Single pallets for bin stores and flippers, full truckloads for wholesalers and exporters.</span></li>
+          <li><strong>See it before you buy</strong><span>Warehouse walkthroughs by appointment, plus photo sets for every lot.</span></li>
+          <li><strong>New lots every week</strong><span>Registered buyers get first look before lots are listed publicly.</span></li>
+        </ul>
+        <a href="#offer" class="btn btn-ghost" data-mode-link="buy">Register as a buyer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lots -->
+  <section id="lots" aria-labelledby="lots-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="lots-title">Lots for sale now</h2>
+        <p>A sample of what's on the warehouse floor this week. Ask for the full manifest on any lot and we'll send it the same day.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter lots by category">
+        <button class="chip" aria-pressed="true" data-filter="all">All lots</button>
+        <button class="chip" aria-pressed="false" data-filter="electronics">Electronics</button>
+        <button class="chip" aria-pressed="false" data-filter="home">Home</button>
+        <button class="chip" aria-pressed="false" data-filter="apparel">Apparel</button>
+        <button class="chip" aria-pressed="false" data-filter="equipment">Equipment</button>
+        <button class="chip" aria-pressed="false" data-filter="mixed">Mixed truckloads</button>
+      </div>
+      <table class="lots">
+        <caption class="sr-only">Current lots for sale</caption>
+        <thead>
+          <tr><th scope="col">Lot</th><th scope="col">Contents</th><th scope="col">Units</th><th scope="col">Condition</th><th scope="col" class="num">Retail value</th><th scope="col" class="num">Price</th><th scope="col"><span class="sr-only">Action</span></th></tr>
+        </thead>
+        <tbody id="lots-body"></tbody>
+      </table>
+      <p class="lots-note">Prices are for the full lot, FOB our warehouse. Delivery quotes are available on request.</p>
+    </div>
+  </section>
+
+  <!-- Offer / contact form -->
+  <section class="offer" id="offer" aria-labelledby="offer-title">
+    <div class="wrap offer-grid">
+      <div class="offer-intro">
+        <h2 id="offer-title">Tell us what you have</h2>
+        <p>A rough description is fine. A manifest gets you a faster, more exact offer. Either way, a buyer on our team will reply within one business day.</p>
+        <div class="contact-lines">
+          <div><span>Call or text</span><a href="tel:+14108472938">(410) 847-2938</a></div>
+          <div><span>Email</span><a href="mailto:offers@surplusholdingsllc.com">offers@surplusholdingsllc.com</a></div>
+          <div><span>Warehouse hours</span><strong>Monday to Friday, 7 am to 5 pm ET</strong></div>
+        </div>
+      </div>
+
+      <form id="offer-form" data-mode="sell" novalidate>
+        <div class="toggle" role="radiogroup" aria-label="What would you like to do?">
+          <input type="radio" name="mode" id="mode-sell" value="sell" checked>
+          <label for="mode-sell">I want to sell</label>
+          <input type="radio" name="mode" id="mode-buy" value="buy">
+          <label for="mode-buy">I want to buy</label>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" autocomplete="name" required>
+            <span class="err">Enter your name.</span>
+          </div>
+          <div class="field">
+            <label for="f-company">Company</label>
+            <input id="f-company" name="company" autocomplete="organization" required>
+            <span class="err">Enter your company name.</span>
+          </div>
+          <div class="field">
+            <label for="f-email">Work email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <span class="err">Enter a valid email address.</span>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+
+          <!-- Seller fields -->
+          <div class="field" data-mode-only="sell">
+            <label for="f-type">Type of inventory</label>
+            <select id="f-type" name="inventory_type">
+              <option value="">Choose one</option>
+              <option>Overstock or closeouts</option>
+              <option>Customer returns</option>
+              <option>Shelf pulls</option>
+              <option>Damaged or salvage</option>
+              <option>Surplus equipment</option>
+              <option>Store fixtures</option>
+              <option>A mix of these</option>
+            </select>
+            <span class="err">Choose the closest match.</span>
+          </div>
+          <div class="field" data-mode-only="sell">
+            <label for="f-qty">Approximate quantity</label>
+            <select id="f-qty" name="quantity">
+              <option>1 to 5 pallets</option>
+              <option>6 to 26 pallets</option>
+              <option>One full truckload</option>
+              <option>Multiple truckloads</option>
+              <option>Equipment or fixtures (not palletized)</option>
+            </select>
+          </div>
+          <div class="field" data-mode-only="sell">
+            <label for="f-zip">Pickup ZIP code</label>
+            <input id="f-zip" name="pickup_zip" inputmode="numeric" autocomplete="postal-code" maxlength="10">
+          </div>
+          <div class="field" data-mode-only="sell">
+            <label for="f-file">Manifest or photos <span class="opt">(optional)</span></label>
+            <input id="f-file" name="manifest" type="file" multiple accept=".csv,.xls,.xlsx,.pdf,image/*">
+          </div>
+
+          <!-- Buyer fields -->
+          <div class="field" data-mode-only="buy">
+            <label for="f-interest">Categories you buy</label>
+            <select id="f-interest" name="buy_category">
+              <option>Everything, show me all lots</option>
+              <option>Electronics</option>
+              <option>Home and kitchen</option>
+              <option>Apparel</option>
+              <option>Equipment and fixtures</option>
+              <option>Mixed general merchandise</option>
+            </select>
+          </div>
+          <div class="field" data-mode-only="buy">
+            <label for="f-lot">Lot number <span class="opt">(optional)</span></label>
+            <input id="f-lot" name="lot" placeholder="e.g. SH-4471">
+          </div>
+
+          <div class="field full">
+            <label for="f-notes" id="notes-label">Anything else we should know?</label>
+            <textarea id="f-notes" name="notes" placeholder="Brands, condition, dock details, timing…"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submit-btn">Request an offer</button>
+          <small>We only use your details to reply to this request.</small>
+        </div>
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="faq-title">Questions we hear a lot</h2>
+        <p>Something else on your mind? Call us. A real person picks up during warehouse hours.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>What's the smallest amount you'll buy?</summary>
+          <p>One full pallet. For equipment and fixtures there's no minimum. A single commercial range or a run of shelving is worth a call. There's no upper limit; we regularly take multiple truckloads from one site.</p>
+        </details>
+        <details>
+          <summary>How do you decide what to offer?</summary>
+          <p>We price each lot on what the specific goods will resell for, their condition, and how quickly that category moves. It isn't a flat percentage of retail, so a lot of current-season electronics will get a very different offer from a lot of last year's seasonal decor.</p>
+        </details>
+        <details>
+          <summary>Do you take untested returns or damaged goods?</summary>
+          <p>Yes. Tell us roughly what you know about condition and we'll price it accordingly. Anything we can't resell is recycled or disposed of responsibly, and we can provide documentation for your records.</p>
+        </details>
+        <details>
+          <summary>Can you keep our products off certain sales channels?</summary>
+          <p>Yes. We can remove labels and tags, restrict resale to export or wholesale only, or keep goods off specific marketplaces. These restrictions are written into the bill of sale.</p>
+        </details>
+        <details>
+          <summary>Who pays for freight?</summary>
+          <p>We do, for accepted offers anywhere in the continental US. We schedule pickup around your dock and bring our own labor when needed.</p>
+        </details>
+        <details>
+          <summary>How do buyers pay for lots?</summary>
+          <p>ACH or wire transfer before pickup. Established buyers can apply for net terms. You can pick up from our warehouse or we can quote delivery.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark" aria-hidden="true"></span><span class="logo-text">Surplus Holdings</span></a>
+        <p class="foot-blurb">We buy excess inventory, returns and surplus equipment outright, then resell it to a network of wholesalers, bin stores and exporters.</p>
+      </div>
+      <div>
+        <h3>Sell to us</h3>
+        <ul>
+          <li><a href="#what-we-buy">What we buy</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#offer" data-mode-link="sell">Get an offer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Buy from us</h3>
+        <ul>
+          <li><a href="#lots">Current lots</a></li>
+          <li><a href="#offer" data-mode-link="buy">Register as a buyer</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Warehouse</h3>
+        <ul>
+          <li>2405 York Road</li>
+          <li>Timonium, MD 21093</li>
+          <li><a href="tel:+14108472938">(410) 847-2938</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© <span id="year">2026</span> Surplus Holdings. All rights reserved.</span>
+      <span><a href="#">Privacy</a> &nbsp;&nbsp; <a href="#">Terms of sale</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Mobile menu
+  const menuBtn = document.querySelector('.menu-btn');
+  const links = document.getElementById('nav-links');
+  menuBtn.addEventListener('click', () => {
+    const open = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', String(!open));
+    menuBtn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    links.classList.toggle('open', !open);
+  });
+  links.addEventListener('click', e => {
+    if (e.target.closest('a')) { links.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); menuBtn.setAttribute('aria-label','Open menu'); }
+  });
+
+  // Lots data (sample listings — replace with live inventory)
+  const lots = [
+    {id:'SH-4471', cat:'electronics', title:'Bluetooth speakers and earbuds', sub:'Big-box customer returns, 2 pallets', units:'312', cond:'Returns, untested', cls:'', retail:18400, price:3950},
+    {id:'SH-4468', cat:'home', title:'Small kitchen appliances', sub:'Overstock, blenders, air fryers, toasters, 3 pallets', units:'186', cond:'New in box', cls:'new', retail:14900, price:4600},
+    {id:'SH-4465', cat:'apparel', title:"Women's outerwear", sub:'Seasonal closeout, sizes XS–XL, 4 pallets', units:'540', cond:'New with tags', cls:'new', retail:38200, price:6800},
+    {id:'SH-4462', cat:'equipment', title:'Commercial kitchen line', sub:'Two 6-burner ranges, fryer, 4 stainless prep tables', units:'7', cond:'Used, working', cls:'used', retail:27500, price:8200},
+    {id:'SH-4459', cat:'mixed', title:'General merchandise truckload', sub:'Big-box returns, home, toys, tools, 26 pallets', units:'≈1,900', cond:'Mixed returns', cls:'', retail:61000, price:9900},
+    {id:'SH-4457', cat:'home', title:'Patio furniture sets', sub:'Damaged outer boxes, contents checked, 6 pallets', units:'44', cond:'Shelf pulls', cls:'', retail:21300, price:5100},
+    {id:'SH-4452', cat:'electronics', title:'Business laptops', sub:'Off-lease, wiped, chargers included', units:'60', cond:'Refurbished, grade B', cls:'used', retail:22800, price:9600},
+    {id:'SH-4449', cat:'equipment', title:'Pallet racking', sub:'40 bays with beams and wire decking', units:'40 bays', cond:'Used, good', cls:'used', retail:16000, price:4300}
+  ];
+  const fmt = n => '$' + n.toLocaleString('en-US');
+  const body = document.getElementById('lots-body');
+
+  function render(filter){
+    const rows = lots.filter(l => filter === 'all' || l.cat === filter);
+    if (!rows.length){ body.innerHTML = '<tr><td colspan="7" class="empty">No lots in this category right now. Register as a buyer and we\'ll tell you when one arrives.</td></tr>'; return; }
+    body.innerHTML = rows.map(l => `
+      <tr>
+        <td class="lot-id">${l.id}</td>
+        <td class="lot-what"><strong>${l.title}</strong><span>${l.sub}</span></td>
+        <td data-label="Units">${l.units}</td>
+        <td data-label="Condition"><span class="cond ${l.cls}">${l.cond}</span></td>
+        <td data-label="Retail value" class="num retail">${fmt(l.retail)}</td>
+        <td data-label="Price" class="num price">${fmt(l.price)}</td>
+        <td><button class="link-btn" data-lot="${l.id}">Request manifest</button></td>
+      </tr>`).join('');
+  }
+  render('all');
+
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed','false'));
+      chip.setAttribute('aria-pressed','true');
+      render(chip.dataset.filter);
+    });
+  });
+
+  // Form mode (sell / buy)
+  const form = document.getElementById('offer-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const notesLabel = document.getElementById('notes-label');
+  const status = document.getElementById('form-status');
+  function setMode(mode){
+    form.dataset.mode = mode;
+    document.getElementById('mode-' + mode).checked = true;
+    submitBtn.textContent = mode === 'sell' ? 'Request an offer' : 'Register as a buyer';
+    notesLabel.textContent = mode === 'sell' ? 'Anything else we should know?' : 'What are you looking for?';
+    document.getElementById('f-notes').placeholder = mode === 'sell'
+      ? 'Brands, condition, dock details, timing…'
+      : 'Volumes you usually buy, where you resell, pickup or delivery…';
+    status.classList.remove('show');
+  }
+  form.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener('change', () => setMode(r.value)));
+  document.querySelectorAll('[data-mode-link]').forEach(a => a.addEventListener('click', () => setMode(a.dataset.modeLink)));
+
+  body.addEventListener('click', e => {
+    const btn = e.target.closest('[data-lot]');
+    if (!btn) return;
+    setMode('buy');
+    document.getElementById('f-lot').value = btn.dataset.lot;
+    document.getElementById('offer').scrollIntoView();
+    setTimeout(() => document.getElementById('f-name').focus({preventScroll:true}), 400);
+  });
+
+  // Validation and submit (front-end only: connect to your form handler or CRM)
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let firstBad = null;
+    const required = ['f-name','f-company','f-email'];
+    if (form.dataset.mode === 'sell') required.push('f-type');
+    form.querySelectorAll('.field').forEach(f => f.classList.remove('invalid'));
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      const ok = id === 'f-email' ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()) : el.value.trim() !== '';
+      if (!ok){ el.closest('.field').classList.add('invalid'); el.setAttribute('aria-invalid','true'); firstBad = firstBad || el; }
+      else el.removeAttribute('aria-invalid');
+    });
+    if (firstBad){ firstBad.focus(); return; }
+    const sell = form.dataset.mode === 'sell';
+    status.textContent = sell
+      ? 'Offer request sent. A buyer will reply within one business day.'
+      : 'Buyer registration sent. We\'ll email you the current lot list within one business day.';
+    status.classList.add('show');
+    const mode = form.dataset.mode;
+    form.reset();
+    setMode(mode);
+    status.classList.add('show');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
